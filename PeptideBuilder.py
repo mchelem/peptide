@@ -21,25 +21,25 @@ from Bio.PDB.Model import *
 from Bio.PDB.Structure import *
 from Bio.PDB.Vector import *
 from Bio.PDB.Entity import*
-from Geometry import *
+from .Geometry import *
 import math, warnings
 
 
 
 def get_prop(atm):
-    print atm.get_name()
-    print atm.get_coord()
-    print atm.get_vector()
-    print atm.get_bfactor()
-    print atm.get_anisou()
-    print atm.get_occupancy()
-    print atm.get_altloc()
-    print atm.get_fullname()
-    print atm.get_serial_number()
-    print atm.get_parent()
-    print atm.get_id()
-    print atm.get_full_id()
-    print atm.get_level()
+    print(atm.get_name())
+    print(atm.get_coord())
+    print(atm.get_vector())
+    print(atm.get_bfactor())
+    print(atm.get_anisou())
+    print(atm.get_occupancy())
+    print(atm.get_altloc())
+    print(atm.get_fullname())
+    print(atm.get_serial_number())
+    print(atm.get_parent())
+    print(atm.get_id())
+    print(atm.get_full_id())
+    print(atm.get_level())
 
 def calculateCoordinates(refA, refB, refC, L, ang, di):
     AV=refA.get_vector()

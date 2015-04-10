@@ -8,8 +8,8 @@ conformation, and it stores the peptide under the name "example.pdb".
 '''
 
 
-import Geometry
-import PeptideBuilder
+from . import Geometry
+from . import PeptideBuilder
 
 
 geo = Geometry.geometry('G')

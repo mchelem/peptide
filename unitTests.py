@@ -5,8 +5,8 @@ This script builds a variety of structures using all the major functionality in 
 '''
 
 
-import Geometry
-import PeptideBuilder
+from . import Geometry
+from . import PeptideBuilder
 import Bio.PDB
 
 
@@ -42,7 +42,7 @@ out.save("test2.pdb")
 # Print out all geometries
 outfile = file("test3.txt", 'w')
 for aa in "ACDEFGHIKLMNPQRSTVWY":
-    print >>outfile, Geometry.geometry(aa)
+    print(Geometry.geometry(aa), file=outfile)
 
 # Build a helix containing all 20 amino acids from list of geometries.
 # The structure should be identical to test1.pdb

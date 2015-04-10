@@ -11,8 +11,8 @@ from Bio.PDB.Structure import *
 from Bio.PDB.Vector import *
 from Bio.PDB.Entity import*
 import math
-import Geometry
-import PeptideBuilder
+from . import Geometry
+from . import PeptideBuilder
 import numpy
 from os import path
 
@@ -31,7 +31,7 @@ def build_linear_model(pdb_filename):
     chain=model['A']
     model_structure_geo=[]
     for res in chain:
-        if(res.get_resname() in resdict.keys()):
+        if(res.get_resname() in list(resdict.keys())):
             tempgeo=Geometry.geometry(resdict[res.get_resname()])
             model_structure_geo.append(tempgeo)
     model_structure=PeptideBuilder.initialize_res(model_structure_geo[0])
@@ -61,7 +61,7 @@ def build_backbone_model(pdb_filename):
     prev_res=""
     rad=180.0/math.pi
     for res in chain:
-        if(res.get_resname() in resdict.keys()):
+        if(res.get_resname() in list(resdict.keys())):
             geo=Geometry.geometry(resdict[res.get_resname()])
             if(prev=="0"):
                  N_prev=res['N']
@@ -130,7 +130,7 @@ def build_all_angles_model(pdb_filename):
     prev_res=""
     rad=180.0/math.pi
     for res in chain:
-        if(res.get_resname() in resdict.keys()):
+        if(res.get_resname() in list(resdict.keys())):
             geo=Geometry.geometry(resdict[res.get_resname()])
             if(prev=="0"):
                 N_prev=res['N']
@@ -187,7 +187,7 @@ def build_phi_psi_model(pdb_filename):
     psi_diangle=[]
     omega_diangle=[]
     for res in chain:
-        if(res.get_resname() in resdict.keys()):
+        if(res.get_resname() in list(resdict.keys())):
                         
             seq+=resdict[res.get_resname()]
             if(len(seq)==1):
@@ -242,11 +242,11 @@ def compare_structure(reference, alternate):
     alt_atoms=[]
 
     for ref_res in ref_chain:
-        if(ref_res.get_resname() in resdict.keys()):
+        if(ref_res.get_resname() in list(resdict.keys())):
             ref_atoms.append(ref_res['CA'])
 
     for alt_res in alt_chain:
-        if(alt_res.get_resname() in resdict.keys()):
+        if(alt_res.get_resname() in list(resdict.keys())):
              alt_atoms.append(alt_res['CA'])
 
     super_imposer= Superimposer()
@@ -318,6 +318,6 @@ test_structures = [ "1aq7", "1gfl", "1nbw", "1vca", "2o6r", "2r83", "3cap", "3cu
 f_out=open("reconstructed_RMSDs.txt","w")
 f_out.write("PDB-ID\t\tlengthPhi-Psi-50\tPhi-Psi-150\tPhi-Psi\tPhi-Psi-Omega-50\tPhi-Psi-Omega-150\tPhi-Psi-Omega\tAll-Angles-50\tAll-Angles-150\tAll-Angles\tBackbone-50\tBackbone-150\tBackbone\n")
 for i in test_structures:
-    print i
+    print(i)
     f_out.write(test_PeptideBuilder(i))
 f_out.close()
